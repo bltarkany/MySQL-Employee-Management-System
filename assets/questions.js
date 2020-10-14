@@ -1,5 +1,6 @@
 // questions for all inquirer prompts
 const questions = {
+  // main menu
   menu: [
     {
       type: 'list',
@@ -57,6 +58,26 @@ const questions = {
       type: 'number',
       name: 'salary',
       message: 'What is the salary for the role: (commas unnecessary) ',
+    },
+  ],
+  addEmp: [
+    {
+      type: 'input',
+      name: 'first_name',
+      message: 'What is the employees first name: ',
+    },
+    {
+      type: 'input',
+      name: 'last_name',
+      message: 'What is the employees last name: ',
+    },
+  ],
+  updateEmp: [
+    {
+      type: 'list',
+      name: 'update',
+      message: 'What would you like to update: ',
+      choices: ['update employee role', 'update employee manager'],
     },
   ],
 };
