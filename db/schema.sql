@@ -27,6 +27,7 @@ create table employee (
     last_name varchar(30) not null,
     role_id int not null,
     manager_id int,
-    foreign key (role_id) references role(id) on delete cascade
+    foreign key (role_id) references role(id) on delete cascade,
+    foreign key (manager_id) references employee(id) on delete cascade
 );
 
