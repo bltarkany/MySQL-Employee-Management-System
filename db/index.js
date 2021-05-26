@@ -46,5 +46,20 @@ class DB {
       byObj
     );
   }
-//   
+  //  add a new dept
+  addDept(dept) {
+    return this.connection.query(`inset into department set ?`, dept);
+  }
+  // add a new role
+  addRole(role) {
+    return this.connection.query(`insert into role set ?`);
+  }
+  //   add new employee
+  addEmp(employee) {
+    return this.connection.query(`insert into employee set ?`, employee);
+  }
+  //   update an employee
+  updateEmp(array) {
+      return this.connection.query(`update employee set ? where ?`, array)
+  }
 }
