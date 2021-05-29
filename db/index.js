@@ -60,6 +60,24 @@ class DB {
   }
   //   update an employee
   updateEmp(array) {
-      return this.connection.query(`update employee set ? where ?`, array)
+    return this.connection.query(`update employee set ? where ?`, array);
+  }
+//   delete dept
+deleteDept(dept) {
+    return this.connection.query(`delete from department where ?`, dept)
+}
+// delete role
+deleteRole(role) {
+    return this.connection.query(`delete from role where ?`, role)
+}
+// delete employee
+deleteEmp(employee){
+    return this.connection.query(`delete from employee where ?`, employee)
+}
+//   end connection 
+  end() {
+    this.connection.end();
   }
 }
+
+module.exports = new DB(connection);
