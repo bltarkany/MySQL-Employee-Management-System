@@ -4,14 +4,14 @@ class DB {
   constructor(connection) {
     this.connection = connection;
   }
-
+  // view all depts
   viewDept() {
     return this.connection.query(`select * from department`);
   }
-
-  // viewDeptBudget(){
-  //     return
-  // }
+  // view all depts with budget attached
+  viewDeptBudget(){
+      return this.connection.query(`select department.id, department.name as Department from department`)
+  }
   // all roles with depts
   viewRoles() {
     return this.connection.query(
@@ -62,19 +62,19 @@ class DB {
   updateEmp(array) {
     return this.connection.query(`update employee set ? where ?`, array);
   }
-//   delete dept
-deleteDept(dept) {
-    return this.connection.query(`delete from department where ?`, dept)
-}
-// delete role
-deleteRole(role) {
-    return this.connection.query(`delete from role where ?`, role)
-}
-// delete employee
-deleteEmp(employee){
-    return this.connection.query(`delete from employee where ?`, employee)
-}
-//   end connection 
+  //   delete dept
+  deleteDept(dept) {
+    return this.connection.query(`delete from department where ?`, dept);
+  }
+  // delete role
+  deleteRole(role) {
+    return this.connection.query(`delete from role where ?`, role);
+  }
+  // delete employee
+  deleteEmp(employee) {
+    return this.connection.query(`delete from employee where ?`, employee);
+  }
+  //   end connection
   end() {
     this.connection.end();
   }
