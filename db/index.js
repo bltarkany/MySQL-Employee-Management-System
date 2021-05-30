@@ -8,7 +8,7 @@ class DB {
   viewDept() {
     return this.connection.query(`select * from department`);
   }
-  // view all depts with budget attached
+  // view all depts with budget attached --- TODO:complete
   viewDeptBudget(){
       return this.connection.query(`select department.id, department.name as Department from department`)
   }
