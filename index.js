@@ -18,13 +18,16 @@ async function menu() {
 
   switch (option.menu) {
     case 'View Depts':
-      // call view dept
+      viewDepts();
       break;
     case 'View Roles':
       // call view dept
       break;
     case 'View Employees':
-      // call view dept
+      allEmp();
+      break;
+    case 'Search Employees':
+      empsBy();
       break;
     case 'Add Dept':
       // call view dept
@@ -55,35 +58,43 @@ async function menu() {
 
 // View Depts -- all
 async function viewDepts() {
+  const action = await inquirer.prompt(questions.viewDept);
+  let data;
+  if (action.viewDept === 'View without Dept Budget') {
+    data = await db.viewDept();
+  } else {
+    data = await db.viewDeptBudget();
+  }
+  console.table(data);
+  console.log(`\n`);
+  menu();
+}
+// view all employees
+async function allEmp() {
+  const data = await db.viewEmpMan();
+  console.table(data);
+  console.log(`\n`);
+  menu();
+}
+// Search Emps by -- options and action callbacks ****************
+async function searchEmps() {
   try {
-    const action = await inquirer.prompt(questions.viewDept);
-    let data;
-    if (action.viewDept === 'View without Dept Budget') {
-      data = await db.viewDept();
-    } else {
-      data = await db.viewDeptBudget();
+    const action = await inquirer.prompt(questions.searchEmp);
+    switch (action.viewEmp) {
+      case 'view all employees':
+        allEmp();
+        break;
+      default:
+        empsBy(action.viewEmp);
+        break;
     }
-    console.table(data);
-    console.log(`\n`);
-    menu();
   } catch (err) {
     console.log(err);
   }
 }
-
-// View Emps by -- options and action callbacks
-async function viewEmps(){
-    try {
-        const action = await inquirer.prompt(questions.viewEmp);
-        switch (action.viewEmp) {
-            case 'view all employees':
-                allEmp();
-                break;      
-            default:
-                empsBy();
-                break;
-        }
-    } catch(err){
-        console.log(err)
-    }
-}
+// view all employees by option
+// async function empsBy(){
+//     try{
+//         const action = await inquirer.prompt(questions.)
+//     }
+// }
