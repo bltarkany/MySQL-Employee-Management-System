@@ -80,14 +80,50 @@ async function allEmp() {
 async function searchEmps() {
   try {
     const action = await inquirer.prompt(questions.searchEmp);
+    let data;
+    let array;
+    let obj; 
+    // TODO:  refactor into if/else?????
     switch (action.viewEmp) {
-      case 'view all employees':
-        allEmp();
+      case 'manager_id':
+        data = await db.viewEmp();
+        array = data.map((manager) => ({
+          name: `${manager.first_name} ${manager.last_name}`,
+          value: manager.id,
+        }));
+        break;
+      case 'role_id':
+        data = await db.viewRoles();
+        array = data.map((role) => ({ name: role.title, value: role.id }));
+        break;
+      case 'dept_id':
+        data = await db.viewRoles();
+        array = data.map((dept) => ({
+          name: dept.department,
+          value: dept.dept_id,
+        }));
         break;
       default:
-        empsBy(action.viewEmp);
+        menu();
         break;
     }
+    // present the obj choices
+    const search = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'id',
+        message: `Which ${by}?`,
+        choices: array,
+      },
+    ]);
+
+    obj[action.viewEmp] = search.id;
+    console.log(obj);
+    const result = await db.viewEmpBy(obj);
+    console.log("Displaying Search Results: \n");
+    console.table(result);
+    menu();
+
   } catch (err) {
     console.log(err);
   }
