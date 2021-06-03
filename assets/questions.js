@@ -10,6 +10,7 @@ const questions = {
         'View Depts',
         'View Roles',
         'View Employees',
+        'Search Employees',
         'Add Dept',
         'Add Role',
         'Add Employee',
@@ -29,16 +30,15 @@ const questions = {
       choices: ['View without Dept Budget', 'View with Dept Budget'],
     },
   ],
-  viewEmp: [
+  searchEmp: [
     {
       type: 'list',
       name: 'viewEmp',
-      message: 'How would you like to view the employees: ',
+      message: 'How would you like to search for employees: ',
       choices: [
-        'view all employees',
-        'view by manager',
-        'view by role',
-        'view by dept',
+        {name: 'by manager', value: 'manager_id' },
+        {name: 'by role', value: 'role_id'},
+        {name: 'by dept', value: 'dept_id'},
       ],
     },
   ],
