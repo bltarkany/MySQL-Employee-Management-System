@@ -9,8 +9,10 @@ class DB {
     return this.connection.query(`select * from department`);
   }
   // view all depts with budget attached --- TODO:complete
-  viewDeptBudget(){
-      return this.connection.query(`select department.id, department.name as Department from department`)
+  viewDeptBudget() {
+    return this.connection.query(
+      `select department.id, department.name as Department from department`
+    );
   }
   // all roles with depts
   viewRoles() {

@@ -82,7 +82,7 @@ async function searchEmps() {
     const action = await inquirer.prompt(questions.searchEmp);
     let data;
     let array;
-    let obj; 
+    let obj;
     // TODO:  refactor into if/else?????
     switch (action.viewEmp) {
       case 'manager_id':
@@ -119,11 +119,12 @@ async function searchEmps() {
 
     obj[action.viewEmp] = search.id;
     console.log(obj);
+
     const result = await db.viewEmpBy(obj);
-    console.log("Displaying Search Results: \n");
+    
+    console.log('Displaying Search Results: \n');
     console.table(result);
     menu();
-
   } catch (err) {
     console.log(err);
   }
